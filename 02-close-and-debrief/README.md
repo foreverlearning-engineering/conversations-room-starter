@@ -41,4 +41,4 @@ The integration guide: https://developers.foreverlearning.ai/docs/conversation-p
 
 ## Next
 
-Step 3, **Pick the room and the cast**, starts from this folder.
+Step 3, **Pick the room and the cast**, starts from step 1's folder, `01-first-room`.

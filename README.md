@@ -6,6 +6,7 @@ The sample repository for **Build with Conversations**: one folder per step and 
 | --- | --- |
 | `01-first-room` | Step 1: Your first practice room |
 | `02-close-and-debrief` | Step 2: Close and debrief |
+| `03-room-and-cast` | Step 3: Pick the room and the cast |
 | `embed` | Recipe: Embed a practice room in your app (`embed/start` is the app before the practice room) |
 | `interview` | Recipe: Interview practice |
 

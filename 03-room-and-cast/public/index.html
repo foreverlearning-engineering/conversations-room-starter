@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pick your practice</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="room">
+    <p id="loading" class="loading">Loading the rooms…</p>
+
+    <section id="picker" hidden aria-labelledby="picker-title">
+      <header>
+        <p class="eyebrow">Practice</p>
+        <h1 id="picker-title" tabindex="-1">Choose your practice</h1>
+      </header>
+      <form id="choose" novalidate>
+        <fieldset class="choice">
+          <legend>What you practise</legend>
+          <label class="option"><input type="radio" name="kind" value="room" checked> A ready-made room</label>
+          <label class="option"><input type="radio" name="kind" value="open"> Open practice</label>
+        </fieldset>
+
+        <div id="room-part" class="part">
+          <label for="room" class="field-label">Room</label>
+          <select id="room" name="room"></select>
+          <p id="room-description" class="description"></p>
+          <label for="mode" class="field-label">Mode</label>
+          <select id="mode" name="mode"></select>
+        </div>
+
+        <div id="open-part" class="part" hidden>
+          <label for="topic" class="field-label">Topic</label>
+          <input id="topic" name="topic" type="text" maxlength="240" aria-describedby="topic-hint" autocomplete="off">
+          <p id="topic-hint" class="hint">Optional. Up to 240 characters.</p>
+          <fieldset class="choice">
+            <legend>Who is in it</legend>
+            <label class="option"><input type="radio" name="shape" value="one_on_one" checked> One-on-one</label>
+            <label class="option"><input type="radio" name="shape" value="room"> A room</label>
+          </fieldset>
+        </div>
+
+        <fieldset class="people">
+          <legend>People</legend>
+          <p id="seats" class="seats" aria-live="polite"></p>
+          <div id="people" class="people-list"></div>
+        </fieldset>
+
+        <p id="refused" class="refused" role="alert" hidden></p>
+        <p class="hint">Preparing a practice adds no charge. The opening and each message are text turns, at 3¢ per text turn, however many people are in the room.</p>
+        <button type="submit" id="start" aria-describedby="seats">Start practice</button>
+      </form>
+    </section>
+
+    <section id="practice" class="practice" hidden aria-labelledby="title">
+      <header>
+        <div class="title-row">
+          <div>
+            <p class="eyebrow">Practice room</p>
+            <h1 id="title"></h1>
+          </div>
+          <button type="button" id="new" class="secondary">New practice</button>
+        </div>
+        <p id="topic-line" class="topic" hidden></p>
+        <p id="cast" class="cast"></p>
+      </header>
+      <ol id="turns" aria-live="polite"></ol>
+      <form id="composer">
+        <label for="message" class="visually-hidden">What you say</label>
+        <textarea id="message" name="message" rows="2" placeholder="Say what you would say" required disabled></textarea>
+        <button type="submit" disabled>Send</button>
+      </form>
+    </section>
+  </main>
+  <script src="/app.js" type="module"></script>
+</body>
+</html>

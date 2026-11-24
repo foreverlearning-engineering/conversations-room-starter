@@ -1,0 +1,11 @@
+{
+  "name": "conversations-room-and-cast",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Build with Conversations, step 3: pick the room and the cast.",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env server.ts"
+  }
+}
