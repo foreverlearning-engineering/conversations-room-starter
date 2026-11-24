@@ -9,7 +9,7 @@ import { handlePractice } from './practice-route.ts';
 
 const PORT = Number(process.env.PORT ?? 3000);
 const PUBLIC = join(import.meta.dirname, 'public');
-const FILES: Record<string, string> = { '/': 'index.html', '/app.js': 'app.js', '/style.css': 'style.css' };
+const FILES: Record<string, string> = { '/': 'index.html', '/app.js': 'app.js', '/style.css': 'style.css', '/faces.js': 'faces.js' };
 const TYPES: Record<string, string> = { html: 'text/html; charset=utf-8', js: 'text/javascript; charset=utf-8', css: 'text/css; charset=utf-8' };
 
 // The product's own data. In a real product this comes from its database.
@@ -25,6 +25,18 @@ const server = createServer(async (request, response) => {
     if (await handlePractice(request, response)) return;
     if (request.method === 'GET' && request.url === '/api/one-to-ones') {
       response.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' }).end(JSON.stringify(ONE_TO_ONES));
+      return;
+    }
+    // Your own face artwork, from public/faces/ (see public/faces.js).
+    const art = request.method === 'GET' ? /^\/faces\/([A-Za-z0-9_-]+\.(png|jpe?g|webp|gif|svg))$/.exec((request.url ?? '').split('?')[0]) : null;
+    if (art) {
+      const types: Record<string, string> = { png: 'image/png', jpg: 'image/jpeg', jpeg: 'image/jpeg', webp: 'image/webp', gif: 'image/gif', svg: 'image/svg+xml' };
+      try {
+        const body = await readFile(join(PUBLIC, 'faces', art[1]));
+        response.writeHead(200, { 'Content-Type': types[art[2]], 'Cache-Control': 'no-store' }).end(body);
+      } catch {
+        response.writeHead(404).end('Not found');
+      }
       return;
     }
     const file = request.method === 'GET' ? FILES[(request.url ?? '/').split('?')[0]] : undefined;

@@ -27,12 +27,14 @@ Open http://localhost:3000. The interviewer opens. Answer two or three questions
 
 | File | What it does |
 | --- | --- |
-| `server.ts` | Step 2's server with the room "Interview Practice", the challenge set when each practice is prepared, and `/api/again`, which prepares a new session (free) and its opening. |
+| `server.ts` | Step 2's server with the room "Interview Practice", the challenge set when each practice is prepared, and `/api/again`, which prepares a new session (no charge) and its opening. |
 | `conversations.ts` | The same client as step 2. |
 | `public/` | The interview page, the debrief, and the two Practice again buttons. |
 
-Each interview costs its opening, each answer and its closeout, at 3¢ per text turn: three answers make five billable text turns, 15¢. Preparing a session and reading the debrief are free.
+Each interview costs its opening, each answer and its closeout, at 3¢ per text turn: three answers make five billable text turns, 15¢. Preparing a session and reading the debrief add no charge.
 
 How the interviewer responded is how they were written to respond in this practice, never a reading of the person practising.
+
+**Your own faces.** Each character's face is drawn in code, in `public/faces.js`. To use your own artwork, put the images in `public/faces/` and write their addresses in the block marked **YOUR OWN ARTWORK GOES HERE**: one per mood, and if you like per expression or per character. Any mood you leave empty keeps the drawn face. The faces are the characters' simulated responses, never a reading of the person practising.
 
 The integration guide: https://developers.foreverlearning.ai/docs/conversation-practice/

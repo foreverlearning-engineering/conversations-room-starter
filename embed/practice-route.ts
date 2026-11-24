@@ -57,9 +57,11 @@ function asError(error: unknown): ConversationsError {
 function view(turn: Turn, receipt?: TurnResult['receipt']) {
   return {
     learner_text: turn.learner_text,
-    lines: turn.structure === 'available' ? [...turn.cast].sort((a, b) => a.order - b.order).map((s) => ({ name: s.display_name, text: s.text })) : [],
+    lines: turn.structure === 'available' ? [...turn.cast].sort((a, b) => a.order - b.order).map((s) => ({ speaker_id: s.speaker_id, name: s.display_name, text: s.text })) : [],
     text: turn.structure === 'available' ? null : turn.text,
     coach: turn.coach?.text?.trim() ? turn.coach.text : null,
+    // Each character's mood and presence on this turn, for the faces (public/faces.js).
+    faces: (turn.characters ?? []).map((c) => ({ speaker_id: c.speaker_id, persona_id: c.persona_id, expression: c.expression, group: c.expression_group, presence: c.presence })),
     safety: { level: turn.safety.level, action: turn.safety.response_action },
     receipt: receipt ? { request_id: receipt.request_id, units: receipt.text?.units ?? 0, amount_micro_usd: receipt.text?.amount_micro_usd ?? 0, settlement: receipt.text?.settlement ?? 'unknown' } : { request_id: turn.request_id },
   };

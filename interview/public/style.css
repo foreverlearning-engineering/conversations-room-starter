@@ -62,3 +62,8 @@ header h1 { margin: 2px 0 4px; font-size: 1.5rem; }
 .again { display: flex; gap: 10px; margin-top: 16px; }
 .again button { font: inherit; padding: 10px 16px; border-radius: 10px; border: 1px solid var(--accent); background: var(--panel); color: var(--accent); cursor: pointer; }
 .again button:last-child { background: var(--accent); color: #fff; }
+/* Faces: drawn in public/faces.js, or your own artwork from public/faces/ (see YOUR OWN ARTWORK GOES HERE in faces.js). */
+.face { float: left; width: 40px; height: 40px; margin: 0 10px 2px 0; border-radius: 50%; object-fit: cover; }
+.face.presence-stepped_away { opacity: 0.45; }
+.face.presence-left { opacity: 0.2; filter: grayscale(1); }
+.line::after, .p-line::after { content: ''; display: block; clear: both; }

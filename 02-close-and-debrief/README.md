@@ -27,13 +27,15 @@ Open http://localhost:3000. Answer the character two or three times, then press 
 
 | File | What it does |
 | --- | --- |
-| `server.ts` | Step 1's server, plus `/api/finish`: it closes the session once (`POST /v1/sessions/{id}/end`, with an operation id kept with the session, so a retried Finish is the same closeout), keeps its receipt, then reads the debrief (free) and puts it in plain words. |
+| `server.ts` | Step 1's server, plus `/api/finish`: it closes the session once (`POST /v1/sessions/{id}/end`, with an operation id kept with the session, so a retried Finish is the same closeout), keeps its receipt, then reads the debrief (no charge) and puts it in plain words. |
 | `conversations.ts` | Step 1's client, plus `closeSession` (it accepts the closeout only with `session_ended` and the final `done`) and `debrief`. |
 | `public/` | The page. Every turn has an id (`turn-<ordinal>`), so the debrief's lines can link to the turns they came from. |
 
-The closeout is a billable text turn, at 3¢ per text turn, charged when it is saved. Reading the debrief is free. Feedback comes at three levels: the Coach in the moment, the debrief after, and Insights across practices (a later step).
+The closeout is a billable text turn, at 3¢ per text turn, charged when it is saved. Reading the debrief adds no charge. Feedback comes at three levels: the Coach in the moment, the debrief after, and Insights across practices (a later step).
 
 How the characters responded is how they were written to respond in this practice, never a reading of the person practising.
+
+**Your own faces.** Each character's face is drawn in code, in `public/faces.js`. To use your own artwork, put the images in `public/faces/` and write their addresses in the block marked **YOUR OWN ARTWORK GOES HERE**: one per mood, and if you like per expression or per character. Any mood you leave empty keeps the drawn face. The faces are the characters' simulated responses, never a reading of the person practising.
 
 The integration guide: https://developers.foreverlearning.ai/docs/conversation-practice/
 

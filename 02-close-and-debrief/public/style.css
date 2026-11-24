@@ -59,3 +59,8 @@ header h1 { margin: 2px 0 4px; font-size: 1.5rem; }
 .small { font-size: 0.8rem; color: var(--muted); margin: 6px 0 0; }
 :target { outline: 2px solid var(--coach-line); outline-offset: 4px; border-radius: 10px; }
 [hidden] { display: none !important; }
+/* Faces: drawn in public/faces.js, or your own artwork from public/faces/ (see YOUR OWN ARTWORK GOES HERE in faces.js). */
+.face { float: left; width: 40px; height: 40px; margin: 0 10px 2px 0; border-radius: 50%; object-fit: cover; }
+.face.presence-stepped_away { opacity: 0.45; }
+.face.presence-left { opacity: 0.2; filter: grayscale(1); }
+.line::after, .p-line::after { content: ''; display: block; clear: both; }

@@ -1,5 +1,7 @@
 // The practice page. It talks only to your own server (/api/start and /api/turn), never to the
 // Conversations API directly. Every text from the API is set as text, never as HTML.
+import { faceFor } from '/faces.js';
+
 const turns = document.querySelector('#turns');
 const form = document.querySelector('#composer');
 const input = document.querySelector('#message');
@@ -23,6 +25,8 @@ function showTurn(turn) {
   const scene = el('div', 'scene');
   for (const line of turn.lines) {
     const bubble = el('div', 'line');
+    const face = (turn.faces ?? []).find((f) => f.speaker_id === line.speaker_id);
+    if (face) bubble.append(faceFor({ ...face, name: line.name }));
     bubble.append(el('p', 'speaker', line.name), el('p', 'words', line.text));
     scene.append(bubble);
   }

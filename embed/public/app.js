@@ -1,5 +1,7 @@
 // Team Desk's page: the week's one-to-ones, and the practice panel, now with a practice room from
 // the Conversations API. The panel talks only to Team Desk's own server (/api/practice/...).
+import { faceFor } from '/faces.js';
+
 const meetings = document.querySelector('#meetings');
 const body = document.querySelector('#practice-body');
 const openButton = document.querySelector('#practice-open');
@@ -37,6 +39,8 @@ function showTurn(turn) {
   if (turn.learner_text) item.append(el('p', 'p-you', turn.learner_text));
   for (const line of turn.lines) {
     const bubble = el('div', 'p-line');
+    const face = (turn.faces ?? []).find((f) => f.speaker_id === line.speaker_id);
+    if (face) bubble.append(faceFor({ ...face, name: line.name }));
     bubble.append(el('span', 'p-name', line.name), el('p', '', line.text));
     item.append(bubble);
   }

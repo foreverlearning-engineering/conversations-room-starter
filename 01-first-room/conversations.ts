@@ -104,7 +104,7 @@ async function getJson<T>(userId: string, path: string): Promise<T> {
   return await response.json() as T;
 }
 
-// The rooms, people and options your key can use. Free.
+// The rooms, people and options your key can use. No charge.
 export async function catalog(userId: string): Promise<Catalog> {
   const all: Catalog = { content_release: '', rooms: [], personas: [] };
   let cursor: string | null = null;
@@ -134,7 +134,7 @@ export async function prepareRoom(userId: string, room: { roomId: string; mode: 
   return await response.json() as Session;
 }
 
-// Read a session's saved turns, in order. Free.
+// Read a session's saved turns, in order. No charge.
 export async function playback(userId: string, sessionId: string): Promise<Turn[]> {
   const turns: Turn[] = [];
   let cursor: string | null = null;
@@ -146,7 +146,7 @@ export async function playback(userId: string, sessionId: string): Promise<Turn[
   return turns;
 }
 
-// Look up a turn whose outcome is uncertain, without starting another. Free.
+// Look up a turn whose outcome is uncertain, without starting another. No charge.
 export async function lookup(userId: string, requestId: string): Promise<{ status: string; session_id?: string }> {
   return await getJson(userId, '/requests/' + encodeURIComponent(requestId));
 }

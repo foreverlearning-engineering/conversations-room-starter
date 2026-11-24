@@ -29,7 +29,7 @@ interface Practice {
 const practices = new Map<string, Practice>();
 const starting = new Map<string, Promise<Practice>>();
 
-const FILES: Record<string, string> = { '/': 'index.html', '/app.js': 'app.js', '/style.css': 'style.css' };
+const FILES: Record<string, string> = { '/': 'index.html', '/app.js': 'app.js', '/style.css': 'style.css', '/faces.js': 'faces.js' };
 const TYPES: Record<string, string> = { html: 'text/html; charset=utf-8', js: 'text/javascript; charset=utf-8', css: 'text/css; charset=utf-8' };
 
 // A pseudonymous user id kept in a cookie: never a name or an email.
@@ -69,9 +69,11 @@ function view(turn: Turn, receipt?: TurnResult['receipt']) {
     ordinal: turn.ordinal,
     operation: turn.operation,
     learner_text: turn.learner_text,
-    lines: turn.structure === 'available' ? [...turn.cast].sort((a, b) => a.order - b.order).map((s) => ({ name: s.display_name, text: s.text })) : [],
+    lines: turn.structure === 'available' ? [...turn.cast].sort((a, b) => a.order - b.order).map((s) => ({ speaker_id: s.speaker_id, name: s.display_name, text: s.text })) : [],
     text: turn.structure === 'available' ? null : turn.text,
     coach: turn.coach?.text?.trim() ? turn.coach.text : null,
+    // Each character's mood and presence on this turn, for the faces (public/faces.js).
+    faces: (turn.characters ?? []).map((c) => ({ speaker_id: c.speaker_id, persona_id: c.persona_id, expression: c.expression, group: c.expression_group, presence: c.presence })),
     safety: { level: turn.safety.level, action: turn.safety.response_action },
     receipt: receipt ? { request_id: receipt.request_id, units: receipt.text?.units ?? 0, amount_micro_usd: receipt.text?.amount_micro_usd ?? 0, settlement: receipt.text?.settlement ?? 'unknown' } : { request_id: turn.request_id },
   };
@@ -152,7 +154,7 @@ function asError(error: unknown): ConversationsError {
   return error instanceof ConversationsError ? error : new ConversationsError(500, 'SERVER_ERROR', (error as Error).message);
 }
 
-// Prepare the room for a new user (free), then its opening (a billable text turn), once.
+// Prepare the room for a new user (no charge), then its opening (a billable text turn), once.
 async function startPractice(user: string): Promise<Practice> {
   const rooms = await catalog(user);
   const room = rooms.rooms.find((r) => r.title === ROOM_TITLE);
@@ -230,7 +232,7 @@ async function turn(request: IncomingMessage, response: ServerResponse) {
   }
 }
 
-// Finish: the closeout (a billable text turn, charged when saved), then the debrief (free).
+// Finish: the closeout (a billable text turn, charged when saved), then the debrief (no charge).
 async function finish(request: IncomingMessage, response: ServerResponse) {
   const user = userId(request, response);
   const practice = practices.get(user);
@@ -267,6 +269,18 @@ const server = createServer(async (request, response) => {
     if (request.method === 'POST' && request.url === '/api/start') return await start(request, response);
     if (request.method === 'POST' && request.url === '/api/turn') return await turn(request, response);
     if (request.method === 'POST' && request.url === '/api/finish') return await finish(request, response);
+    // Your own face artwork, from public/faces/ (see public/faces.js).
+    const art = request.method === 'GET' ? /^\/faces\/([A-Za-z0-9_-]+\.(png|jpe?g|webp|gif|svg))$/.exec((request.url ?? '').split('?')[0]) : null;
+    if (art) {
+      const types: Record<string, string> = { png: 'image/png', jpg: 'image/jpeg', jpeg: 'image/jpeg', webp: 'image/webp', gif: 'image/gif', svg: 'image/svg+xml' };
+      try {
+        const body = await readFile(join(PUBLIC, 'faces', art[1]));
+        response.writeHead(200, { 'Content-Type': types[art[2]], 'Cache-Control': 'no-store' }).end(body);
+      } catch {
+        response.writeHead(404).end('Not found');
+      }
+      return;
+    }
     const file = request.method === 'GET' ? FILES[(request.url ?? '/').split('?')[0]] : undefined;
     if (!file) {
       response.writeHead(404).end('Not found');
