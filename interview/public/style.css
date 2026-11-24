@@ -1,0 +1,64 @@
+:root {
+  --bg: #f3f6f5;
+  --panel: #ffffff;
+  --ink: #1b1f1f;
+  --muted: #59625f;
+  --accent: #176b70;
+  --user: #e1efee;
+  --coach: #fbf6e9;
+  --coach-line: #c9a227;
+  --line: #d9e0de;
+  --clear: #2f7d4f;
+  --watch: #9a6b00;
+  --critical: #a1122b;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+.room { max-width: 760px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; padding: 24px 16px; }
+.eyebrow { margin: 0; color: var(--accent); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; }
+header h1 { margin: 2px 0 4px; font-size: 1.5rem; }
+.cast { margin: 0 0 16px; color: var(--muted); }
+#turns { list-style: none; margin: 0; padding: 0; flex: 1; display: flex; flex-direction: column; gap: 14px; }
+.turn { display: flex; flex-direction: column; gap: 6px; max-width: 90%; }
+.turn.user { align-self: flex-end; background: var(--user); border-radius: 14px; padding: 10px 14px; }
+.turn.waiting { color: var(--muted); font-style: italic; }
+.turn.failed { border: 1px solid var(--critical); border-radius: 14px; padding: 10px 14px; background: var(--panel); }
+.scene { display: flex; flex-direction: column; gap: 6px; }
+.line { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 8px 14px; }
+.speaker { margin: 0 0 2px; font-weight: 600; color: var(--accent); font-size: 0.9rem; }
+.words { margin: 0; line-height: 1.45; white-space: pre-wrap; }
+.unattributed { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 8px 14px; }
+.coach { background: var(--coach); border-left: 3px solid var(--coach-line); border-radius: 6px; padding: 8px 12px; }
+.coach-label { margin: 0 0 2px; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; color: #7a5d00; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font-size: 0.78rem; padding: 2px 8px; border-radius: 999px; background: #e6ebea; color: var(--muted); }
+.chip.safety-clear { background: #e3f1e8; color: var(--clear); }
+.chip.safety-watch { background: #f6edd6; color: var(--watch); }
+.chip.safety-critical, .chip.safety-unknown { background: #f7dde2; color: var(--critical); }
+#composer { display: flex; gap: 8px; margin-top: 16px; }
+#composer textarea { flex: 1; font: inherit; padding: 10px; border-radius: 10px; border: 1px solid var(--line); resize: vertical; }
+#composer button { font: inherit; padding: 0 18px; border: 0; border-radius: 10px; background: var(--accent); color: #fff; cursor: pointer; }
+#composer button:disabled { opacity: 0.5; cursor: default; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.turn .user { align-self: flex-end; background: var(--user); border-radius: 14px; padding: 10px 14px; }
+.turn.pending .user { opacity: 0.7; }
+#composer button.secondary { background: var(--panel); color: var(--accent); border: 1px solid var(--accent); }
+.debrief { margin-top: 24px; padding: 16px 18px; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; }
+.debrief h2 { margin: 0 0 8px; font-size: 1.25rem; }
+.debrief h3 { margin: 14px 0 4px; font-size: 1rem; color: var(--accent); }
+.debrief ul { margin: 4px 0; padding-left: 20px; }
+.debrief li { margin: 2px 0; line-height: 1.45; }
+.insight { border-left: 3px solid var(--accent); padding: 4px 10px; margin: 6px 0; }
+.insight-title { margin: 0; font-weight: 600; }
+.next { color: var(--muted); }
+.refs { font-size: 0.85rem; }
+.ref { color: var(--accent); }
+.small { font-size: 0.8rem; color: var(--muted); margin: 6px 0 0; }
+:target { outline: 2px solid var(--coach-line); outline-offset: 4px; border-radius: 10px; }
+[hidden] { display: none !important; }
+.again { display: flex; gap: 10px; margin-top: 16px; }
+.again button { font: inherit; padding: 10px 16px; border-radius: 10px; border: 1px solid var(--accent); background: var(--panel); color: var(--accent); cursor: pointer; }
+.again button:last-child { background: var(--accent); color: #fff; }

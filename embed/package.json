@@ -1,0 +1,11 @@
+{
+  "name": "team-desk",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Team Desk with a practice room from the Conversations API: the finished Embed recipe.",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env server.ts"
+  }
+}

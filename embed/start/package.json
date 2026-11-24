@@ -1,0 +1,11 @@
+{
+  "name": "team-desk",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Team Desk: a sample product for the Embed recipe of Build with Conversations, before the practice room.",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env server.ts"
+  }
+}

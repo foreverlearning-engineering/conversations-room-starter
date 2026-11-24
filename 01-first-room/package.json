@@ -1,0 +1,11 @@
+{
+  "name": "conversations-first-room",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Build with Conversations, step 1: your first practice room.",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env server.ts"
+  }
+}

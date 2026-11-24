@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Team Desk</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="bar">
+    <span class="logo">Team Desk</span>
+    <nav><a href="#" aria-current="page">One-to-ones</a><a href="#">Goals</a><a href="#">Notes</a></nav>
+  </header>
+  <main class="layout">
+    <section class="card">
+      <h1>Your one-to-ones</h1>
+      <p class="muted">This week, with your team.</p>
+      <ul id="meetings" class="meetings"></ul>
+    </section>
+    <aside class="card practice" id="practice">
+      <h2>Practice the conversation</h2>
+      <p class="muted" id="practice-intro">Rehearse a hard one-to-one before it happens.</p>
+      <button type="button" id="practice-open" class="primary">Practice with Jon</button>
+      <div id="practice-body"></div>
+    </aside>
+  </main>
+  <script src="/app.js" type="module"></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My first practice room</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="room">
+    <header>
+      <p class="eyebrow">Practice room</p>
+      <h1 id="title">Opening the room…</h1>
+      <p id="cast" class="cast"></p>
+    </header>
+    <ol id="turns" aria-live="polite"></ol>
+    <form id="composer">
+      <label for="message" class="visually-hidden">What you say</label>
+      <textarea id="message" name="message" rows="2" placeholder="Say what you would say" required disabled></textarea>
+      <button type="submit" disabled>Send</button>
+    </form>
+  </main>
+  <script src="/app.js" type="module"></script>
+</body>
+</html>
