@@ -34,6 +34,8 @@ Open http://localhost:3000 and press **Practice with Jon**. The room "Direct Fee
 
 The opening and each message are billable text turns, at 3¢ per text turn. In your own product, pass your own opaque user id instead of the sample's cookie, and never a name or an email.
 
-**Your own faces.** Each character's face is drawn in code, in `public/faces.js`. To use your own artwork, put the images in `public/faces/` and write their addresses in the block marked **YOUR OWN ARTWORK GOES HERE**: one per mood, and if you like per expression or per character. Any mood you leave empty keeps the drawn face. The faces are the characters' simulated responses, never a reading of the person practising.
+**Your own faces.** Each character's face is drawn in code, in `public/faces.js`. To use your own artwork, put the images in `public/faces/` and write their addresses in the block marked **YOUR OWN ARTWORK GOES HERE**: one per mood, and if you like per expression or per character. Any mood you leave empty keeps the drawn face. The faces are the characters' simulated responses, never a reading of the person practicing.
 
 The integration guide: https://developers.foreverlearning.ai/docs/conversation-practice/
+
+**Session closeout.** Ending is optional: opening the learner's next session closes the open one with one billable closeout (3 cents), the same as calling end yourself. Call end when you want the debrief right away. Do not call end just to start another practice.

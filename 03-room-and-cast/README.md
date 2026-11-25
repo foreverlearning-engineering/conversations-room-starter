@@ -1,6 +1,6 @@
 # Step 3: Pick the room and the cast
 
-Step 1's practice room, plus a picker. The user chooses a ready-made room and the people in it, or practises on their own topic, then practises as in step 1, with every character's line under that character's own name and face. Your server keeps the key; the page talks only to your server.
+Step 1's practice room, plus a picker. The user chooses a ready-made room and the people in it, or practices on their own topic, then practices as in step 1, with every character's line under that character's own name and face. Your server keeps the key; the page talks only to your server.
 
 ## You need
 
@@ -31,7 +31,7 @@ Then press **New practice**, pick a room, tick your own people, and answer again
 
 | File | What it does |
 | --- | --- |
-| `server.ts` | Serves the page and gives each new browser a pseudonymous user id in a cookie. `/api/state` reads the catalog (no charge) and sends the picker: rooms that need no topic consent, by title and category, the people, the modes by label. `/api/start` checks the choice against the same limits, prepares one session (no charge) and requests its opening, once. `/api/turn` relays each message as a turn. `/api/new` goes back to the picker; the earlier session stays as it was. |
+| `server.ts` | Serves the page and gives each new browser a pseudonymous user id in a cookie. `/api/state` reads the catalog (no charge) and sends the picker: rooms that need no topic consent, by title and category, the people, the modes by label. `/api/start` checks the choice against the same limits, prepares one session (no charge) and requests its opening, once. `/api/turn` relays each message as a turn. `/api/new` goes back to the picker; it does not end the earlier session. Opening the next session closes the open one with one billable closeout (3 cents). |
 | `conversations.ts` | Step 1's client, plus the catalog's categories and modes, and `prepareOpen` for open practice next to `prepareRoom`. An error that the API itself reports (an error status, or an error event before `done`) is marked as not committed. |
 | `public/` | The picker and the practice page. Each reply shows every character's line under their name, with the face that matches the line's speaker, the Coach in its own panel, and the safety status and receipt apart from the conversation. |
 
@@ -41,8 +41,10 @@ Then press **New practice**, pick a room, tick your own people, and answer again
 
 **When a message doesn't go through.** If the Conversations API answers with an error status instead of an event stream, or an error event arrives before `done`, nothing was committed or charged: the page says so in a short sentence and puts your words back in the box, and sending it again is a new request with a new Idempotency-Key. If a turn's outcome is uncertain (the connection ends before `done`), the server looks it up with `GET /v1/requests/{id}` and reads the saved turn, instead of sending it again under a new key.
 
-This step keeps sessions in memory: if the server restarts, a returning browser sees the picker again. It never ends a session.
+This step keeps sessions in memory: if the server restarts, a returning browser sees the picker again. It never calls end itself; opening the next session closes the prior one with one billable closeout (3 cents).
 
 **Your own faces.** Each character's face is drawn in code, in `public/faces.js`. To use your own artwork, put the images in `public/faces/` and write their addresses in the block marked **YOUR OWN ARTWORK GOES HERE**: one per mood, and if you like per expression or per character. Any mood you leave empty keeps the drawn face. The faces are the characters' simulated responses in this practice, never a reading of you.
 
 The integration guide: https://developers.foreverlearning.ai/docs/conversation-practice/
+
+**Session closeout.** Ending is optional: opening the learner's next session closes the open one with one billable closeout (3 cents), the same as calling end yourself. Call end when you want the debrief right away. Do not call end just to start another practice.

@@ -1,5 +1,5 @@
 // Pick the room and the cast: step 1's practice room, plus a picker. The user chooses a ready-made
-// room and the people in it, or practises on their own topic, then practises as in step 1.
+// room and the people in it, or practices on their own topic, then practices as in step 1.
 // Node 24+, no packages. Start it with: npm start
 import { createServer, type IncomingMessage, type ServerResponse } from 'node:http';
 import { readFile, appendFile } from 'node:fs/promises';

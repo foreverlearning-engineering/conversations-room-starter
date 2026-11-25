@@ -33,12 +33,14 @@ Open http://localhost:3000. Answer the character two or three times, then press 
 
 The closeout is a billable text turn, at 3¢ per text turn, charged when it is saved. Reading the debrief adds no charge. Feedback comes at three levels: the Coach in the moment, the debrief after, and Insights across practices (a later step).
 
-How the characters responded is how they were written to respond in this practice, never a reading of the person practising.
+How the characters responded is how they were written to respond in this practice, never a reading of the person practicing.
 
-**Your own faces.** Each character's face is drawn in code, in `public/faces.js`. To use your own artwork, put the images in `public/faces/` and write their addresses in the block marked **YOUR OWN ARTWORK GOES HERE**: one per mood, and if you like per expression or per character. Any mood you leave empty keeps the drawn face. The faces are the characters' simulated responses, never a reading of the person practising.
+**Your own faces.** Each character's face is drawn in code, in `public/faces.js`. To use your own artwork, put the images in `public/faces/` and write their addresses in the block marked **YOUR OWN ARTWORK GOES HERE**: one per mood, and if you like per expression or per character. Any mood you leave empty keeps the drawn face. The faces are the characters' simulated responses, never a reading of the person practicing.
 
 The integration guide: https://developers.foreverlearning.ai/docs/conversation-practice/
 
 ## Next
 
 Step 3, **Pick the room and the cast**, starts from step 1's folder, `01-first-room`.
+
+**Session closeout.** Ending is optional: opening the learner's next session closes the open one with one billable closeout (3 cents), the same as calling end yourself. Call end when you want the debrief right away. Do not call end just to start another practice.

@@ -35,12 +35,14 @@ The opening and each message are billable text turns, at 3¢ per text turn. The 
 
 If a turn's outcome is uncertain (the connection ends before `done`), the server looks it up with `GET /v1/requests/{id}` and reads the saved turn, instead of sending it again under a new key.
 
-This step keeps sessions in memory: if the server restarts, a returning browser gets a new session and a new opening. It never ends a session; step 2 does.
+This step keeps sessions in memory: if the server restarts, a returning browser gets a new session and a new opening. It never calls end itself; opening a new session can close the prior one. Step 2 adds an explicit Finish button for an immediate debrief.
 
-**Your own faces.** Each character's face is drawn in code, in `public/faces.js`. To use your own artwork, put the images in `public/faces/` and write their addresses in the block marked **YOUR OWN ARTWORK GOES HERE**: one per mood, and if you like per expression or per character. Any mood you leave empty keeps the drawn face. The faces are the characters' simulated responses, never a reading of the person practising.
+**Your own faces.** Each character's face is drawn in code, in `public/faces.js`. To use your own artwork, put the images in `public/faces/` and write their addresses in the block marked **YOUR OWN ARTWORK GOES HERE**: one per mood, and if you like per expression or per character. Any mood you leave empty keeps the drawn face. The faces are the characters' simulated responses, never a reading of the person practicing.
 
 The integration guide: https://developers.foreverlearning.ai/docs/conversation-practice/
 
 ## Next
 
 Step 2, **Close and debrief**, starts from this folder.
+
+**Session closeout.** Ending is optional: opening the learner's next session closes the open one with one billable closeout (3 cents), the same as calling end yourself. Call end when you want the debrief right away. Do not call end just to start another practice.
