@@ -47,7 +47,7 @@ export const MOOD_WORDS = {
 };
 const PRESENCE_WORDS = { present: '', stepped_away: ', stepped away', left: ', has left the room' };
 
-// The drawn faces: a head colour, brows, eyes and a mouth for each mood.
+// The drawn faces: a head color, brows, eyes and a mouth for each mood.
 const DRAWN = {
   steady_and_engaged: { fill: '#dfe9e8', brows: ['M11 13 L17 13', 'M23 13 L29 13'], pupils: 17, mouth: 'M13 26 Q20 30 27 26' },
   more_open: { fill: '#e3f1e8', brows: ['M11 11 Q14 9 17 11', 'M23 11 Q26 9 29 11'], pupils: 17, mouth: 'M12 24 Q20 33 28 24' },

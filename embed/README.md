@@ -29,7 +29,7 @@ Open http://localhost:3000 and press **Practice with Jon**. The room "Direct Fee
 | `practice-route.ts` | New. Two routes on your own server, `/api/practice/start` and `/api/practice/turn`: the only code that calls the Conversations API, and the only place the key is read. |
 | `conversations.ts` | New. The same small client as step 1 of the ladder. |
 | `server.ts` | One line: `if (await handlePractice(request, response)) return;` |
-| `public/app.js`, `public/style.css` | The panel shows the room, in the product's colours and type. |
+| `public/app.js`, `public/style.css` | The panel shows the room, in the product's colors and type. |
 | `.env.example` | The key, the API host and the assignment id. |
 
 The opening and each message are billable text turns, at 3¢ per text turn. In your own product, pass your own opaque user id instead of the sample's cookie, and never a name or an email.
